@@ -305,4 +305,53 @@ def propose(src, item, state):
            caption=caption[:1000], reply_markup=json.dumps(keyboard))
 
 
-def
+def check_sources(state):
+    proposals = 0
+    for src in SOURCES:
+        if not src.get("enabled", True):
+            continue
+        try:
+            items = fetch_rss(src) if src["type"] == "rss" else fetch_page(src)
+        except Exception as e:
+            print(f"[{src['id']}] no se pudo leer: {e}")
+            continue
+
+        keywords = [k.lower() for k in src.get("keywords", [])]
+        if keywords:
+            items = [i for i in items if any(k in i["title"].lower() for k in keywords)]
+
+        seen = state["seen"].get(src["id"])
+        if seen is None:
+            # Primera vez que se mira esta fuente: memoriza lo que hay sin proponer nada,
+            # para no recibir de golpe todo el contenido antiguo.
+            state["seen"][src["id"]] = [i["link"] for i in items][-500:]
+            print(f"[{src['id']}] inicializada con {len(items)} elementos")
+            continue
+
+        seen_set = set(seen)
+        for item in items:
+            if item["link"] in seen_set:
+                continue
+            if proposals >= MAX_PROPOSALS_PER_RUN:
+                break   # lo que quede se propone en la siguiente ejecución
+            try:
+                propose(src, item, state)
+                proposals += 1
+            except Exception as e:
+                print(f"[{src['id']}] error al proponer {item['link']}: {e}")
+            seen.append(item["link"])
+            seen_set.add(item["link"])
+        state["seen"][src["id"]] = seen[-500:]
+
+
+# ---------------------------------------------------------------- principal
+def main():
+    state = load_state()
+    handle_updates(state)
+    check_sources(state)
+    STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1))
+    git_push("actualización del bot")
+
+
+if __name__ == "__main__":
+    main()
