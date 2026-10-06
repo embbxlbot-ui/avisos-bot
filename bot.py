@@ -190,7 +190,48 @@ def publish(image_url, caption):
     return r["id"]
 
 
-# ---------------------------------------------------------------- Telegram: mensajes y botones
+   # ---------------------------------------------------------------- Telegram: mensajes y botones
+def tweet_info(url):
+    """Texto e idioma del tweet, sacados del embed oficial de X."""
+    try:
+        oembed = requests.get("https://publish.twitter.com/oembed",
+                              params={"url": url, "dnt": "true"}, timeout=30).json()
+        p = BeautifulSoup(oembed["html"], "html.parser").find("p")
+        if p is None:
+            return "", None
+        for a in p.find_all("a"):
+            if a.get_text().startswith(("http", "pic.")):   # quita enlaces acortados
+                a.decompose()
+        return " ".join(p.get_text(" ").split()), p.get("lang")
+    except Exception:
+        return "", None
+
+
+def translate(text, src_lang, dest="es"):
+    """Traducción gratuita con MyMemory (sin clave). Devuelve None si falla."""
+    chunks, current = [], ""
+    for sentence in re.split(r"(?<=[.!?])\s+", text):   # trozos de menos de 450 bytes
+        if len((current + " " + sentence).encode()) > 450 and current:
+            chunks.append(current)
+            current = sentence
+        else:
+            current = (current + " " + sentence).strip()
+    if current:
+        chunks.append(current)
+    out = []
+    for chunk in chunks:
+        try:
+            r = requests.get("https://api.mymemory.translated.net/get",
+                             params={"q": chunk, "langpair": f"{src_lang}|{dest}"}, timeout=30).json()
+            piece = (r.get("responseData") or {}).get("translatedText")
+            if r.get("responseStatus") != 200 or not piece:
+                return None
+            out.append(html.unescape(piece))
+        except Exception:
+            return None
+    return " ".join(out)
+
+
 def handle_tweet(text):
     m = TWEET_RE.search(text)
     if not m:
@@ -198,7 +239,17 @@ def handle_tweet(text):
     user, tid = m.group(1), m.group(2)
     url = f"https://x.com/{user}/status/{tid}"
     extra = TWEET_RE.sub("", text).strip()   # texto junto al enlace = pie de foto
-    caption = (extra + "\n\n" if extra else "") + f"Fuente: @{user} en X" + DISCLAIMER
+
+    translation = ""
+    original, lang = tweet_info(url)
+    if original and lang and lang not in ("es", "und", "zxx"):
+        tr = translate(original, lang)
+        if tr:
+            translation = f"🇪🇸 Traducción automática:\n{tr}\n\n"
+        else:
+            say(f"⚠️ No se pudo traducir el tweet ({lang}). Se publica sin traducción.")
+
+    caption = (extra + "\n\n" if extra else "") + translation + f"Fuente: @{user} en X" + DISCLAIMER
     try:
         png, jpg = IMG_DIR / f"{tid}.png", IMG_DIR / f"{tid}.jpg"
         capture_tweet(url, png)
@@ -274,6 +325,14 @@ def fetch_page(src):
     r = requests.get(src["url"], headers=HEADERS, timeout=30)
     r.raise_for_status()
     soup = BeautifulSoup(r.content, "html.parser")
+    if src.get("pattern"):   # vigila un texto concreto (p. ej. la fecha de actualización)
+        text = " ".join(soup.get_text(" ").split())
+        m = re.search(src["pattern"], text)
+        if not m:
+            return []
+        found = m.group(0)
+        tag = hashlib.sha1(found.encode()).hexdigest()[:8]
+        return [{"title": f"{src['title']}: {found}", "link": f"{src['url']}#{tag}"}]
     root = soup.select_one(src.get("selector", "body")) or soup
     items, seen_links = [], set()
     for a in root.select("a[href]"):
