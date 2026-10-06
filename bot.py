@@ -129,41 +129,58 @@ def to_instagram(png, jpg, W=1080, H=1350, margin=60):
     canvas.save(jpg, "JPEG", quality=92)
 
 
-CARD_TEMPLATE = """<!doctype html><html><head><meta charset="utf-8"><style>
+ACCOUNT = "@espana.bxl"
+
+CARD_TEMPLATE = """<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
 * { box-sizing: border-box; margin: 0; }
-body { width: 1080px; height: 1350px; background: #FBF6EC; padding: 90px 80px;
-       font-family: 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
-       display: flex; flex-direction: column; }
-.bar { height: 18px; width: 220px; border-radius: 9px;
-       background: linear-gradient(90deg, #C8102E 0 50%, #F1BF00 50% 100%); }
-.src { margin-top: 50px; font-size: 32px; font-weight: 700; color: #C8102E;
+body { width: 1080px; height: 1350px; background: #FBF6EC; color: #1D1D1F;
+       font-family: 'Archivo', 'DejaVu Sans', sans-serif; display: flex; flex-direction: column; }
+.top { background: #C8102E; height: 150px; padding: 0 80px; display: flex;
+       align-items: center; justify-content: space-between; }
+.handle { color: #FFFFFF; font-size: 42px; font-weight: 800; }
+.region { color: #FFFFFF; font-size: 28px; font-weight: 700; letter-spacing: 4px; }
+.band { height: 20px; background: #F1BF00; }
+.main { flex: 1; padding: 80px 80px 50px; display: flex; flex-direction: column; }
+.tag { align-self: flex-start; background: #1D1D1F; color: #F1BF00; font-size: 30px; font-weight: 800;
+       letter-spacing: 3px; text-transform: uppercase; padding: 16px 32px; border-radius: 999px; }
+.src { margin-top: 46px; font-size: 32px; font-weight: 700; color: #C8102E;
        text-transform: uppercase; letter-spacing: 2px; line-height: 1.3; }
-.title { margin-top: 40px; font-size: __SIZE__px; line-height: 1.22; font-weight: 700;
-         color: #1d1d1f; display: -webkit-box; -webkit-line-clamp: 10;
+.title { margin-top: 26px; font-size: __SIZE__px; line-height: 1.14; font-weight: 800;
+         letter-spacing: -0.5px; display: -webkit-box; -webkit-line-clamp: 9;
          -webkit-box-orient: vertical; overflow: hidden; }
-.date { margin-top: 40px; font-size: 30px; color: #6b6b6b; }
-.foot { margin-top: auto; padding-top: 30px; border-top: 2px solid #e3dccd;
-        font-size: 28px; color: #6b6b6b; }
+.date { margin-top: auto; padding-top: 40px; font-size: 30px; font-weight: 500; color: #5A5A5A; }
+.foot { background: #1D1D1F; color: #FFFFFF; padding: 38px 80px; font-size: 28px; font-weight: 500; }
+.foot b { color: #F1BF00; font-weight: 800; }
 </style></head><body>
-<div class="bar"></div>
-<div class="src">__SRC__</div>
-<div class="title">__TITLE__</div>
-<div class="date">__DATE__</div>
-<div class="foot">Cuenta no oficial · Más información en la fuente oficial</div>
+<div class="top"><span class="handle">__ACCOUNT__</span><span class="region">BRUSELAS</span></div>
+<div class="band"></div>
+<div class="main">
+  <span class="tag">__TAG__</span>
+  <div class="src">__SRC__</div>
+  <div class="title">__TITLE__</div>
+  <div class="date">Aviso del __DATE__</div>
+</div>
+<div class="foot"><b>Cuenta no oficial</b> · Consulta siempre la fuente oficial</div>
 </body></html>"""
 
 
-def render_card(source_name, title, out_jpg):
-    size = 64 if len(title) <= 110 else 52 if len(title) <= 200 else 44
+def render_card(source_name, title, out_jpg, tag="Aviso"):
+    n = len(title)
+    size = 76 if n <= 80 else 64 if n <= 140 else 54 if n <= 220 else 44
     page_html = (CARD_TEMPLATE
                  .replace("__SIZE__", str(size))
+                 .replace("__ACCOUNT__", html.escape(ACCOUNT))
+                 .replace("__TAG__", html.escape(tag))
                  .replace("__SRC__", html.escape(source_name))
                  .replace("__TITLE__", html.escape(title))
                  .replace("__DATE__", datetime.now().strftime("%d/%m/%Y")))
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1080, "height": 1350})
-        page.set_content(page_html)
+        page.set_content(page_html, wait_until="networkidle")   # espera a la tipografía
+        page.wait_for_timeout(500)
         page.screenshot(path=str(out_jpg), type="jpeg", quality=92)
         browser.close()
 
