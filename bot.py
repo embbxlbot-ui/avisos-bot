@@ -31,6 +31,8 @@ DISCLAIMER = (
     "Confirma siempre en los canales oficiales."
 )
 WATERMARK = "Compartido por @espana.bxl · Se recomienda consultar canales oficiales"
+RUN_MINUTES = 25              # cuánto tiempo escucha Telegram cada ejecución
+SOURCES_EVERY = 10            # cada cuántos minutos revisa las fuentes web
 MAX_PROPOSALS_PER_RUN = 5       # como mucho 5 propuestas nuevas por ejecución
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; avisos-bot/1.0)"}
 
@@ -348,6 +350,11 @@ def handle_callback(cq, state):
     if str(msg.get("chat", {}).get("id")) != ALLOWED_CHAT:
         return
     action, _, pid = (cq.get("data") or "").partition(":")
+    try:   # responde al momento para que Telegram deje de "pensar"
+        tg("answerCallbackQuery", callback_query_id=cq["id"],
+           text="⏳ Publicando… tarda 1-2 minutos" if action == "ok" else "Descartando…")
+    except Exception:
+        pass
     item = state["pending"].pop(pid, None)
 
     if item is None:
@@ -365,10 +372,6 @@ def handle_callback(cq, state):
         (IMG_DIR / f"{pid}.jpg").unlink(missing_ok=True)
         result = "🗑️ Descartado"
 
-    try:
-        tg("answerCallbackQuery", callback_query_id=cq["id"], text=result[:190])
-    except Exception:
-        pass   # Telegram rechaza respuestas a botones pulsados hace rato; no importa
     if pid not in state["pending"]:   # quita los botones salvo si hay que reintentar
         try:
             tg("editMessageReplyMarkup", chat_id=ALLOWED_CHAT, message_id=msg["message_id"],
@@ -378,8 +381,9 @@ def handle_callback(cq, state):
     say(result, reply_to_message_id=msg.get("message_id"))
 
 
-def handle_updates(state):
-    updates = tg("getUpdates", offset=state["offset"], timeout=0)["result"]
+def handle_updates(state, wait=0):
+    """Lee los mensajes y botones de Telegram. Con wait>0 espera hasta que llegue algo."""
+    updates = tg("getUpdates", offset=state["offset"], timeout=wait)["result"]
     for u in updates:
         state["offset"] = u["update_id"] + 1
         if "callback_query" in u:
@@ -388,6 +392,7 @@ def handle_updates(state):
             msg = u["message"]
             if str(msg.get("chat", {}).get("id")) == ALLOWED_CHAT:
                 handle_tweet(msg.get("text", ""))
+    return len(updates)
 
 
 # ---------------------------------------------------------------- fuentes web
@@ -563,14 +568,27 @@ def check_sources(state):
 
 
 # ---------------------------------------------------------------- principal
-def main():
-    state = load_state()
-    handle_updates(state)
-    check_sources(state)
+def save_and_push(state, message):
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1))
-    git_push("actualización del bot")
+    git_push(message)
+
+
+def main():
+    """Se queda escuchando Telegram unos minutos para que los botones respondan al momento.
+    Las fuentes web se revisan al empezar y cada SOURCES_EVERY minutos."""
+    state = load_state()
+    end = time.time() + RUN_MINUTES * 60
+    next_sources = 0
+    while time.time() < end:
+        if time.time() >= next_sources:
+            check_sources(state)
+            save_and_push(state, "fuentes revisadas")
+            next_sources = time.time() + SOURCES_EVERY * 60
+        wait = int(max(1, min(45, end - time.time())))
+        if handle_updates(state, wait):
+            save_and_push(state, "mensajes de Telegram procesados")
+    save_and_push(state, "actualización del bot")
 
 
 if __name__ == "__main__":
     main()
-   
