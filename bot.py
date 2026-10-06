@@ -23,7 +23,6 @@ ALLOWED_CHAT = str(os.environ["TG_CHAT_ID"])    # solo acepta mensajes tuyos
 IG_TOKEN = os.environ["IG_TOKEN"]
 IG_USER = os.environ["IG_USER_ID"]
 REPO = os.environ["GITHUB_REPOSITORY"]          # lo pone GitHub: usuario/repo
-BRANCH = os.environ.get("BRANCH", "main")
 IG_API = "https://graph.instagram.com/v22.0"    # sube la versión si Meta la retira
 
 DISCLAIMER = (
@@ -61,11 +60,33 @@ def git_push(message):
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
         return
     subprocess.run(["git", "commit", "-m", message], check=True)
-    subprocess.run(["git", "push"], check=True)
+    for attempt in range(3):
+        # se sincroniza con lo último del repositorio; si hay choque, ganan los cambios del bot
+        subprocess.run(["git", "pull", "--rebase", "-X", "theirs"])
+        if subprocess.run(["git", "push"]).returncode == 0:
+            return
+        time.sleep(5)
+    raise RuntimeError("No se pudo subir al repositorio. Revisa los permisos de Actions (Read and write).")
 
 
-def raw_url(name):
-    return f"https://raw.githubusercontent.com/{REPO}/{BRANCH}/images/{name}.jpg"
+def image_url(name):
+    """URL pública de la imagen, servida por GitHub Pages."""
+    owner, repo = REPO.split("/")
+    return f"https://{owner.lower()}.github.io/{repo}/images/{name}.jpg"
+
+
+def wait_until_online(url, timeout=300):
+    """Espera a que GitHub Pages publique la imagen (suele tardar 1-2 minutos)."""
+    end = time.time() + timeout
+    while time.time() < end:
+        try:
+            r = requests.head(url, timeout=15)
+            if r.status_code == 200 and r.headers.get("content-type", "").startswith("image/"):
+                return
+        except requests.RequestException:
+            pass
+        time.sleep(10)
+    raise RuntimeError(f"La imagen no está disponible en {url}. ¿Está activado GitHub Pages?")
 
 
 def load_state():
@@ -184,8 +205,9 @@ def handle_tweet(text):
         to_instagram(png, jpg)
         png.unlink()
         git_push(f"imagen {tid}")
-        time.sleep(10)
-        post_id = publish(raw_url(tid), caption)
+        url_img = image_url(tid)
+        wait_until_online(url_img)
+        post_id = publish(url_img, caption)
         say(f"✅ Tweet publicado en Instagram (id {post_id})")
     except Exception as e:
         say(f"❌ Error con {url}:\n{e}")
@@ -202,7 +224,9 @@ def handle_callback(cq, state):
         result = "Ya estaba procesado"
     elif action == "ok":
         try:
-            post_id = publish(raw_url(pid), item["caption"])
+            url_img = image_url(pid)
+            wait_until_online(url_img)
+            post_id = publish(url_img, item["caption"])
             result = f"✅ Publicado en Instagram (id {post_id})"
         except Exception as e:
             state["pending"][pid] = item   # se queda pendiente para reintentar
@@ -281,53 +305,4 @@ def propose(src, item, state):
            caption=caption[:1000], reply_markup=json.dumps(keyboard))
 
 
-def check_sources(state):
-    proposals = 0
-    for src in SOURCES:
-        if not src.get("enabled", True):
-            continue
-        try:
-            items = fetch_rss(src) if src["type"] == "rss" else fetch_page(src)
-        except Exception as e:
-            print(f"[{src['id']}] no se pudo leer: {e}")
-            continue
-
-        keywords = [k.lower() for k in src.get("keywords", [])]
-        if keywords:
-            items = [i for i in items if any(k in i["title"].lower() for k in keywords)]
-
-        seen = state["seen"].get(src["id"])
-        if seen is None:
-            # Primera vez que se mira esta fuente: memoriza lo que hay sin proponer nada,
-            # para no recibir de golpe todo el contenido antiguo.
-            state["seen"][src["id"]] = [i["link"] for i in items][-500:]
-            print(f"[{src['id']}] inicializada con {len(items)} elementos")
-            continue
-
-        seen_set = set(seen)
-        for item in items:
-            if item["link"] in seen_set:
-                continue
-            if proposals >= MAX_PROPOSALS_PER_RUN:
-                break   # lo que quede se propone en la siguiente ejecución
-            try:
-                propose(src, item, state)
-                proposals += 1
-            except Exception as e:
-                print(f"[{src['id']}] error al proponer {item['link']}: {e}")
-            seen.append(item["link"])
-            seen_set.add(item["link"])
-        state["seen"][src["id"]] = seen[-500:]
-
-
-# ---------------------------------------------------------------- principal
-def main():
-    state = load_state()
-    handle_updates(state)
-    check_sources(state)
-    STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1))
-    git_push("actualización del bot")
-
-
-if __name__ == "__main__":
-    main()
+def
