@@ -1,0 +1,21 @@
+[
+  {
+    "id": "consulado-inicio",
+    "name": "Consulado General de España en Bruselas",
+    "type": "page",
+    "url": "https://www.exteriores.gob.es/Consulados/bruselas/es/Paginas/index.aspx"
+  },
+  {
+    "id": "consulado-empleo",
+    "name": "Consulado General de España en Bruselas",
+    "type": "page",
+    "url": "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Paginas/Ofertas-de-empleo.aspx"
+  },
+  {
+    "id": "boe-belgica",
+    "name": "Boletín Oficial del Estado (BOE)",
+    "type": "rss",
+    "url": "https://www.boe.es/rss/boe.php",
+    "keywords": ["Bélgica", "Bruselas"]
+  }
+]
