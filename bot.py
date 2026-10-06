@@ -369,7 +369,7 @@ def propose(src, item, state):
     if pid in state["pending"]:   # mismo enlace aparecido en otra fuente
         return
     jpg = IMG_DIR / f"{pid}.jpg"
-    render_card(src["name"], item["title"], jpg)
+    render_card(src["name"], title, jpg, src.get("tag", "Aviso"))
     caption = f"{item['title']}\n\nFuente: {src['name']}\n{item['link']}" + DISCLAIMER
     state["pending"][pid] = {"caption": caption}
     keyboard = {"inline_keyboard": [[
