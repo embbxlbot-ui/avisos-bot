@@ -15,7 +15,7 @@ import requests
 import feedparser
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 # ---------------------------------------------------------------- configuración
 TG_TOKEN = os.environ["TG_TOKEN"]
@@ -30,6 +30,7 @@ DISCLAIMER = (
     "no nos responsabilizamos de cambios o información desactualizada. "
     "Confirma siempre en los canales oficiales."
 )
+WATERMARK = "Compartido por @espana.bxl · Se recomienda consultar canales oficiales"
 MAX_PROPOSALS_PER_RUN = 5       # como mucho 5 propuestas nuevas por ejecución
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; avisos-bot/1.0)"}
 
@@ -119,7 +120,39 @@ def capture_tweet(url, out_png):
         browser.close()
 
 
-def to_instagram(png, jpg, W=1080, H=1350, margin=60):
+def watermark_font(size):
+    for path in ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                 "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"):
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default(size=size)
+
+
+def add_watermark(jpg):
+    """Marca de agua discreta en la esquina inferior derecha (capturas de tweets)."""
+    im = Image.open(jpg).convert("RGBA")
+    W, H = im.size
+    size = 24
+    while True:   # reduce la letra hasta que quepa
+        font = watermark_font(size)
+        x0, y0, x1, y1 = font.getbbox(WATERMARK)
+        tw, th = x1 - x0, y1 - y0
+        if tw + 40 <= W - 40 or size <= 14:
+            break
+        size -= 1
+    pad_x, pad_y = 20, 10
+    box_w, box_h = tw + 2 * pad_x, th + 2 * pad_y
+    bx, by = W - box_w - 20, H - box_h - 14
+    layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    draw.rounded_rectangle([bx, by, bx + box_w, by + box_h], radius=box_h // 2, fill=(29, 29, 31, 175))
+    draw.text((bx + pad_x - x0, by + pad_y - y0), WATERMARK, font=font, fill=(255, 255, 255, 240))
+    Image.alpha_composite(im, layer).convert("RGB").save(jpg, "JPEG", quality=92)
+
+
+def to_instagram(png, jpg, W=1080, H=1350, margin=70):
     """Centra la captura en un lienzo 4:5. Instagram solo acepta JPEG."""
     im = Image.open(png).convert("RGB")
     scale = min((W - 2 * margin) / im.width, (H - 2 * margin) / im.height)
@@ -150,6 +183,11 @@ body { width: 1080px; height: 1350px; background: #FBF6EC; color: #1D1D1F;
 .title { margin-top: 26px; font-size: __SIZE__px; line-height: 1.14; font-weight: 800;
          letter-spacing: -0.5px; display: -webkit-box; -webkit-line-clamp: 9;
          -webkit-box-orient: vertical; overflow: hidden; }
+.summary { margin-top: 30px; font-size: 34px; line-height: 1.38; font-weight: 500; color: #3A3A3A;
+           display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.summary:empty { display: none; }
+.wm { align-self: flex-end; margin-top: 26px; background: rgba(29, 29, 31, 0.72); color: #FFFFFF;
+      font-size: 22px; font-weight: 700; padding: 10px 22px; border-radius: 999px; }
 .date { margin-top: auto; padding-top: 40px; font-size: 30px; font-weight: 500; color: #5A5A5A; }
 .foot { background: #1D1D1F; color: #FFFFFF; padding: 38px 80px; font-size: 28px; font-weight: 500; }
 .foot b { color: #F1BF00; font-weight: 800; }
@@ -160,21 +198,31 @@ body { width: 1080px; height: 1350px; background: #FBF6EC; color: #1D1D1F;
   <span class="tag">__TAG__</span>
   <div class="src">__SRC__</div>
   <div class="title">__TITLE__</div>
+  <div class="summary">__SUMMARY__</div>
   <div class="date">Aviso del __DATE__</div>
+  <span class="wm">__WATERMARK__</span>
 </div>
 <div class="foot"><b>Cuenta no oficial</b> · Consulta siempre la fuente oficial</div>
 </body></html>"""
 
 
-def render_card(source_name, title, out_jpg, tag="Aviso"):
+def render_card(source_name, title, out_jpg, tag="Aviso", summary=""):
     n = len(title)
-    size = 76 if n <= 80 else 64 if n <= 140 else 54 if n <= 220 else 44
+    if summary:   # con resumen, el titular algo más pequeño para que quepa todo
+        size = 60 if n <= 80 else 52 if n <= 140 else 44 if n <= 220 else 40
+    else:
+        size = 76 if n <= 80 else 64 if n <= 140 else 54 if n <= 220 else 44
+    short = summary.split("\n\n")[0]
+    if len(short) > 280:
+        short = short[:280].rsplit(" ", 1)[0] + "…"
     page_html = (CARD_TEMPLATE
                  .replace("__SIZE__", str(size))
                  .replace("__ACCOUNT__", html.escape(ACCOUNT))
+                 .replace("__WATERMARK__", html.escape(WATERMARK))
                  .replace("__TAG__", html.escape(tag))
                  .replace("__SRC__", html.escape(source_name))
                  .replace("__TITLE__", html.escape(title))
+                 .replace("__SUMMARY__", html.escape(short))
                  .replace("__DATE__", datetime.now().strftime("%d/%m/%Y")))
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -205,8 +253,6 @@ def publish(image_url, caption):
     if "id" not in r:
         raise RuntimeError(r)
     return r["id"]
-
-
    # ---------------------------------------------------------------- Telegram: mensajes y botones
 def tweet_info(url):
     """Texto e idioma del tweet, sacados del embed oficial de X."""
@@ -271,6 +317,7 @@ def handle_tweet(text):
         png, jpg = IMG_DIR / f"{tid}.png", IMG_DIR / f"{tid}.jpg"
         capture_tweet(url, png)
         to_instagram(png, jpg)
+        add_watermark(jpg)
         png.unlink()
         git_push(f"imagen {tid}")
         url_img = image_url(tid)
@@ -333,8 +380,13 @@ def fetch_rss(src):
     r = requests.get(src["url"], headers=HEADERS, timeout=30)
     r.raise_for_status()
     feed = feedparser.parse(r.content)
-    return [{"title": " ".join((e.get("title") or "").split()), "link": e.get("link")}
-            for e in feed.entries if e.get("title") and e.get("link")]
+    items = []
+    for e in feed.entries:
+        if e.get("title") and e.get("link"):
+            summary = BeautifulSoup(e.get("summary") or "", "html.parser").get_text(" ")
+            items.append({"title": " ".join(e["title"].split()), "link": e["link"],
+                          "summary": " ".join(summary.split())[:900]})
+    return items
 
 
 def fetch_page(src):
@@ -364,13 +416,84 @@ def fetch_page(src):
     return items
 
 
+def article_summary(url, max_chars=900):
+    """Primeros párrafos de la página enlazada, para dar contexto al aviso."""
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=30)
+        r.raise_for_status()
+        if "html" not in r.headers.get("content-type", "text/html"):
+            return ""   # p. ej. un PDF
+        soup = BeautifulSoup(r.content, "html.parser")
+        for tag in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
+            tag.decompose()
+        root = soup.find("article") or soup.find("main") or soup.body or soup
+        paras, total = [], 0
+        for el in root.find_all(["p", "li"]):
+            t = " ".join(el.get_text(" ").split())
+            low = t.lower()
+            if len(t) < 60 or t in paras or "cookie" in low or "javascript" in low:
+                continue
+            paras.append(t)
+            total += len(t)
+            if total >= max_chars:
+                break
+        text = "\n\n".join(paras)
+        if not text:
+            meta = (soup.find("meta", attrs={"property": "og:description"})
+                    or soup.find("meta", attrs={"name": "description"}))
+            text = " ".join(((meta.get("content") if meta else "") or "").split())
+        if len(text) > max_chars:
+            text = text[:max_chars].rsplit(" ", 1)[0] + "…"
+        return text
+    except Exception:
+        return ""
+
+
+def fetch_stib(src):
+    """Avisos de la STIB (API pública de datos abiertos, sin clave). Solo devuelve los importantes."""
+    r = requests.get(src["url"], headers=HEADERS, timeout=30)
+    r.raise_for_status()
+    records = r.json().get("results", [])
+
+    keywords = [k.lower() for k in src.get("keywords", [])]
+    items, seen_texts = [], set()
+    for rec in records:
+        try:
+            texts = json.loads(rec.get("content") or "[]")[0]["text"][0]
+            points = json.loads(rec.get("points") or "[]")
+        except (ValueError, KeyError, IndexError, TypeError):
+            continue
+        text = " ".join((texts.get("fr") or texts.get("en") or texts.get("nl") or "").split())
+        low = text.lower()
+        important = any(k in low for k in keywords) or (
+            "métro" in low and len(points) >= src.get("min_points_metro", 8))
+        key = hashlib.sha1(low.encode()).hexdigest()[:10]   # mismo texto en varias paradas = 1 aviso
+        if not text or not important or key in seen_texts:
+            continue
+        seen_texts.add(key)
+        items.append({"title": text, "link": f"{src['link']}#{key}"})
+    return items
+
+
 def propose(src, item, state):
     pid = hashlib.sha1(item["link"].encode()).hexdigest()[:12]
     if pid in state["pending"]:   # mismo enlace aparecido en otra fuente
         return
     jpg = IMG_DIR / f"{pid}.jpg"
-    render_card(src["name"], title, jpg, src.get("tag", "Aviso"))
-    caption = f"{item['title']}\n\nFuente: {src['name']}\n{item['link']}" + DISCLAIMER
+    title, original = item["title"], ""
+    if src.get("translate_from"):
+        tr = translate(item["title"], src["translate_from"])
+        if not tr:   # nunca se propone en francés: se reintenta en la siguiente ejecución
+            raise RuntimeError("no se pudo traducir al español, se reintentará")
+        title = tr
+        original = f"\n\n🇪🇸 Traducción automática. Texto original: {item['title']}"
+    link = item["link"].split("#")[0]
+    summary = item.get("summary", "")
+    if not summary and src["type"] == "page" and not src.get("pattern"):
+        summary = article_summary(link)
+    render_card(src["name"], title, jpg, src.get("tag", "Aviso"), summary)
+    body = f"\n\n{summary}" if summary else ""
+    caption = f"{title}{body}{original}\n\nMás información: {link}\nFuente: {src['name']}" + DISCLAIMER
     state["pending"][pid] = {"caption": caption}
     keyboard = {"inline_keyboard": [[
         {"text": "✅ Publicar", "callback_data": f"ok:{pid}"},
@@ -387,16 +510,19 @@ def check_sources(state):
         if not src.get("enabled", True):
             continue
         try:
-            items = fetch_rss(src) if src["type"] == "rss" else fetch_page(src)
+            fetch = {"rss": fetch_rss, "stib": fetch_stib}.get(src["type"], fetch_page)
+            items = fetch(src)
         except Exception as e:
             print(f"[{src['id']}] no se pudo leer: {e}")
             continue
 
         keywords = [k.lower() for k in src.get("keywords", [])]
-        if keywords:
+        if keywords and src["type"] != "stib":   # la STIB ya filtra dentro de fetch_stib
             items = [i for i in items if any(k in i["title"].lower() for k in keywords)]
 
         seen = state["seen"].get(src["id"])
+        if seen is None and src.get("propose_on_first_run"):
+            seen = []   # fuente con pocos avisos filtrados: se proponen ya los actuales
         if seen is None:
             # Primera vez que se mira esta fuente: memoriza lo que hay sin proponer nada,
             # para no recibir de golpe todo el contenido antiguo.
@@ -415,6 +541,7 @@ def check_sources(state):
                 proposals += 1
             except Exception as e:
                 print(f"[{src['id']}] error al proponer {item['link']}: {e}")
+                continue   # no se marca como visto: se reintenta en la siguiente ejecución
             seen.append(item["link"])
             seen_set.add(item["link"])
         state["seen"][src["id"]] = seen[-500:]
@@ -431,3 +558,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+   
