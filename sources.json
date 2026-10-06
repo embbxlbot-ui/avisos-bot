@@ -12,6 +12,38 @@
     "url": "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Paginas/Ofertas-de-empleo.aspx"
   },
   {
+    "id": "embajada-inicio",
+    "name": "Embajada de España en Bélgica",
+    "type": "page",
+    "url": "https://www.exteriores.gob.es/Embajadas/bruselas/es/Paginas/index.aspx"
+  },
+  {
+    "id": "exteriores-recomendaciones",
+    "name": "Ministerio de Asuntos Exteriores",
+    "type": "page",
+    "url": "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx",
+    "pattern": "Recomendaciones vigentes a \\d{1,2} de \\w+ de \\d{4}",
+    "title": "Actualizadas las recomendaciones de viaje para Bélgica"
+  },
+  {
+    "id": "consejeria-trabajo",
+    "name": "Consejería de Trabajo, Migraciones y Seguridad Social en Bélgica",
+    "type": "page",
+    "url": "https://www.mites.gob.es/belgica"
+  },
+  {
+    "id": "consejeria-educacion",
+    "name": "Consejería de Educación en Bélgica",
+    "type": "page",
+    "url": "https://www.educacionfpydeportes.gob.es/belgica/portada.html"
+  },
+  {
+    "id": "centro-crisis",
+    "name": "Centro de Crisis Nacional de Bélgica",
+    "type": "page",
+    "url": "https://crisiscenter.be/fr"
+  },
+  {
     "id": "boe-belgica",
     "name": "Boletín Oficial del Estado (BOE)",
     "type": "rss",
