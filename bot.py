@@ -9,7 +9,7 @@ Pensado para ejecutarse en GitHub Actions cada 10 minutos.
 """
 import os, re, json, time, html, hashlib, pathlib, subprocess
 from datetime import datetime
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 import feedparser
@@ -147,7 +147,7 @@ def add_watermark(jpg):
     bx, by = W - box_w - 20, H - box_h - 14
     layer = Image.new("RGBA", im.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(layer)
-    draw.rounded_rectangle([bx, by, bx + box_w, by + box_h], radius=box_h // 2, fill=(29, 29, 31, 175))
+    draw.rounded_rectangle([bx, by, bx + box_w, by + box_h], radius=box_h // 2, fill=(15, 35, 65, 200))
     draw.text((bx + pad_x - x0, by + pad_y - y0), WATERMARK, font=font, fill=(255, 255, 255, 240))
     Image.alpha_composite(im, layer).convert("RGB").save(jpg, "JPEG", quality=92)
 
@@ -165,56 +165,70 @@ def to_instagram(png, jpg, W=1080, H=1350, margin=70):
 ACCOUNT = "@espana.bxl"
 
 CARD_TEMPLATE = """<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; }
-body { width: 1080px; height: 1350px; background: #FBF6EC; color: #1D1D1F;
+body { width: 1080px; height: 1350px; background: #F5F3EF; color: #0F2341;
        font-family: 'Archivo', 'DejaVu Sans', sans-serif; display: flex; flex-direction: column; }
-.top { background: #C8102E; height: 150px; padding: 0 80px; display: flex;
+.cond { font-family: 'Barlow Condensed', 'DejaVu Sans Condensed', sans-serif; }
+.top { flex-shrink: 0; background: #8E1B2C; height: 150px; padding: 0 80px; display: flex;
        align-items: center; justify-content: space-between; }
-.handle { color: #FFFFFF; font-size: 42px; font-weight: 800; }
-.region { color: #FFFFFF; font-size: 28px; font-weight: 700; letter-spacing: 4px; }
-.band { height: 20px; background: #F1BF00; }
-.main { flex: 1; padding: 80px 80px 50px; display: flex; flex-direction: column; }
-.tag { align-self: flex-start; background: #1D1D1F; color: #F1BF00; font-size: 30px; font-weight: 800;
-       letter-spacing: 3px; text-transform: uppercase; padding: 16px 32px; border-radius: 999px; }
-.src { margin-top: 46px; font-size: 32px; font-weight: 700; color: #C8102E;
+.handle { color: #FFFFFF; font-size: 52px; font-weight: 800; letter-spacing: 1px; }
+.region { color: #FFFFFF; font-size: 32px; font-weight: 700; letter-spacing: 6px; }
+.band { flex-shrink: 0; height: 8px; background: #C9A646; }
+.main { flex: 1; min-height: 0; padding: 70px 80px 40px; display: flex; flex-direction: column; }
+.tag { align-self: flex-start; background: #0F2341; color: #FFFFFF; font-size: 34px; font-weight: 700;
+       letter-spacing: 3px; text-transform: uppercase; padding: 12px 34px; border-radius: 999px; }
+.src { margin-top: 40px; font-size: 32px; font-weight: 700; color: #8E1B2C;
        text-transform: uppercase; letter-spacing: 2px; line-height: 1.3; }
-.title { margin-top: 26px; font-size: __SIZE__px; line-height: 1.14; font-weight: 800;
-         letter-spacing: -0.5px; display: -webkit-box; -webkit-line-clamp: 9;
-         -webkit-box-orient: vertical; overflow: hidden; }
-.summary { margin-top: 30px; font-size: 34px; line-height: 1.38; font-weight: 500; color: #3A3A3A;
+.body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 30px 0; }
+.title { font-size: __SIZE__px; line-height: 1.04; font-weight: 800; text-transform: uppercase;
+         display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+.summary { margin-top: 34px; font-size: 34px; line-height: 1.4; font-weight: 500; color: #3B4658;
            display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
 .summary:empty { display: none; }
-.wm { align-self: flex-end; margin-top: 26px; background: rgba(29, 29, 31, 0.72); color: #FFFFFF;
-      font-size: 22px; font-weight: 700; padding: 10px 22px; border-radius: 999px; }
-.date { margin-top: auto; padding-top: 40px; font-size: 30px; font-weight: 500; color: #5A5A5A; }
-.foot { background: #1D1D1F; color: #FFFFFF; padding: 38px 80px; font-size: 28px; font-weight: 500; }
-.foot b { color: #F1BF00; font-weight: 800; }
+.info { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; gap: 30px;
+        background: #E9E5DC; border-radius: 22px; padding: 30px 36px; }
+.info .lbl { font-size: 26px; font-weight: 700; letter-spacing: 3px; color: #8E1B2C; }
+.info .dom { margin-top: 6px; font-size: 40px; font-weight: 800; color: #0F2341; }
+.info .hint { font-size: 26px; font-weight: 500; color: #5B6577; text-align: right; line-height: 1.35; }
+.bottom { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; margin-top: 30px; gap: 22px; }
+.date { align-self: flex-start; font-size: 28px; font-weight: 500; color: #5B6577; }
+.wm { white-space: nowrap; background: rgba(15, 35, 65, 0.78); color: #FFFFFF; font-size: 20px; font-weight: 700;
+      padding: 10px 22px; border-radius: 999px; }
 </style></head><body>
-<div class="top"><span class="handle">__ACCOUNT__</span><span class="region">BRUSELAS</span></div>
+<div class="top"><span class="handle cond">__ACCOUNT__</span><span class="region cond">BRUSELAS</span></div>
 <div class="band"></div>
 <div class="main">
-  <span class="tag">__TAG__</span>
+  <span class="tag cond">__TAG__</span>
   <div class="src">__SRC__</div>
-  <div class="title">__TITLE__</div>
-  <div class="summary">__SUMMARY__</div>
-  <div class="date">Aviso del __DATE__</div>
-  <span class="wm">__WATERMARK__</span>
+  <div class="body">
+    <div class="title cond">__TITLE__</div>
+    <div class="summary">__SUMMARY__</div>
+  </div>
+  <div class="info">
+    <div><div class="lbl">MÁS INFORMACIÓN</div><div class="dom">__DOMAIN__</div></div>
+    <div class="hint">Enlace completo<br>en la descripción ↓</div>
+  </div>
+  <div class="bottom">
+    <div class="date">Aviso del __DATE__</div>
+    <span class="wm">__WATERMARK__</span>
+  </div>
 </div>
-<div class="foot"><b>Cuenta no oficial</b> · Consulta siempre la fuente oficial</div>
 </body></html>"""
 
 
-def render_card(source_name, title, out_jpg, tag="Aviso", summary=""):
+def render_card(source_name, title, out_jpg, tag="Aviso", summary="", link=""):
     n = len(title)
     if summary:   # con resumen, el titular algo más pequeño para que quepa todo
-        size = 60 if n <= 80 else 52 if n <= 140 else 44 if n <= 220 else 40
+        size = 66 if n <= 70 else 58 if n <= 130 else 50 if n <= 210 else 42
     else:
-        size = 76 if n <= 80 else 64 if n <= 140 else 54 if n <= 220 else 44
-    short = summary.split("\n\n")[0]
-    if len(short) > 280:
-        short = short[:280].rsplit(" ", 1)[0] + "…"
+        size = 92 if n <= 70 else 78 if n <= 130 else 64 if n <= 210 else 54
+    paras = [x for x in summary.split("\n\n") if x]
+    short = " ".join(paras[:2])
+    if len(short) > 360:
+        short = short[:360].rsplit(" ", 1)[0] + "…"
+    domain = urlparse(link).netloc.removeprefix("www.") or "la fuente oficial"
     page_html = (CARD_TEMPLATE
                  .replace("__SIZE__", str(size))
                  .replace("__ACCOUNT__", html.escape(ACCOUNT))
@@ -223,6 +237,7 @@ def render_card(source_name, title, out_jpg, tag="Aviso", summary=""):
                  .replace("__SRC__", html.escape(source_name))
                  .replace("__TITLE__", html.escape(title))
                  .replace("__SUMMARY__", html.escape(short))
+                 .replace("__DOMAIN__", html.escape(domain))
                  .replace("__DATE__", datetime.now().strftime("%d/%m/%Y")))
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -491,7 +506,7 @@ def propose(src, item, state):
     summary = item.get("summary", "")
     if not summary and src["type"] == "page" and not src.get("pattern"):
         summary = article_summary(link)
-    render_card(src["name"], title, jpg, src.get("tag", "Aviso"), summary)
+    render_card(src["name"], title, jpg, src.get("tag", "Aviso"), summary, link)
     body = f"\n\n{summary}" if summary else ""
     caption = f"{title}{body}{original}\n\nMás información: {link}\nFuente: {src['name']}" + DISCLAIMER
     state["pending"][pid] = {"caption": caption}
