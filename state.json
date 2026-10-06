@@ -178,7 +178,8 @@
    "https://www.exteriores.gob.es/es/Paginas/Cookies.aspx"
   ],
   "exteriores-recomendaciones": [
-   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#039247b2"
+   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#039247b2",
+   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#e00cb9ea"
   ],
   "consejeria-educacion": [
    "https://www.educacionfpydeportes.gob.es/belgica/oficinasycentros.html",
@@ -262,5 +263,9 @@
    "https://www.stib.brussels#1f8bcbc014"
   ]
  },
- "pending": {}
+ "pending": {
+  "2e8a59784ab9": {
+   "caption": "Actualizadas las recomendaciones de viaje para Bélgica: Recomendaciones vigentes a 7 de octubre de 2026\n\nMás información: https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx\nFuente: Ministerio de Asuntos Exteriores\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  }
+ }
 }
