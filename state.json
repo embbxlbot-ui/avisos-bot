@@ -131,7 +131,8 @@
    "https://transparencia.gob.es/",
    "https://www.exteriores.gob.es/es/Paginas/Politica-de-privacidad.aspx",
    "https://www.exteriores.gob.es/es/Paginas/navegacion.aspx",
-   "https://www.exteriores.gob.es/es/Paginas/Cookies.aspx"
+   "https://www.exteriores.gob.es/es/Paginas/Cookies.aspx",
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx"
   ],
   "boe-belgica": [],
   "embajada-inicio": [
@@ -256,5 +257,9 @@
    "http://www.enable-javascript.com/"
   ]
  },
- "pending": {}
+ "pending": {
+  "b69e6f8567fd": {
+   "caption": "Elecciones a las Cortes Generales de 29 de noviembre de 2026\n\nFuente: Consulado General de España en Bruselas\nhttps://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  }
+ }
 }
