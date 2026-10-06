@@ -2,24 +2,28 @@
   {
     "id": "consulado-inicio",
     "name": "Consulado General de España en Bruselas",
+    "tag": "Aviso consular",
     "type": "page",
     "url": "https://www.exteriores.gob.es/Consulados/bruselas/es/Paginas/index.aspx"
   },
   {
     "id": "consulado-empleo",
     "name": "Consulado General de España en Bruselas",
+    "tag": "Empleo",
     "type": "page",
     "url": "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Paginas/Ofertas-de-empleo.aspx"
   },
   {
     "id": "embajada-inicio",
     "name": "Embajada de España en Bélgica",
+    "tag": "Embajada",
     "type": "page",
     "url": "https://www.exteriores.gob.es/Embajadas/bruselas/es/Paginas/index.aspx"
   },
   {
     "id": "exteriores-recomendaciones",
     "name": "Ministerio de Asuntos Exteriores",
+    "tag": "Viajes",
     "type": "page",
     "url": "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx",
     "pattern": "Recomendaciones vigentes a \\d{1,2} de \\w+ de \\d{4}",
@@ -28,24 +32,39 @@
   {
     "id": "consejeria-trabajo",
     "name": "Consejería de Trabajo, Migraciones y Seguridad Social en Bélgica",
+    "tag": "Trabajo y Seg. Social",
     "type": "page",
     "url": "https://www.mites.gob.es/belgica"
   },
   {
     "id": "consejeria-educacion",
     "name": "Consejería de Educación en Bélgica",
+    "tag": "Educación",
     "type": "page",
     "url": "https://www.educacionfpydeportes.gob.es/belgica/portada.html"
   },
   {
     "id": "centro-crisis",
     "name": "Centro de Crisis Nacional de Bélgica",
+    "tag": "Alerta",
     "type": "page",
     "url": "https://crisiscenter.be/fr"
   },
   {
+    "id": "stib-avisos",
+    "name": "STIB · Transporte de Bruselas",
+    "tag": "Aviso de transporte",
+    "type": "stib",
+    "url": "https://api-management-discovery-production.azure-api.net/api/datasets/stibmivb/rt/TravellersInformation",
+    "link": "https://www.stib.brussels",
+    "keywords": ["grève", "fortement perturb", "manifestation", "tout le réseau", "préavis"],
+    "translate_from": "fr",
+    "propose_on_first_run": true
+  },
+  {
     "id": "boe-belgica",
     "name": "Boletín Oficial del Estado (BOE)",
+    "tag": "BOE",
     "type": "rss",
     "url": "https://www.boe.es/rss/boe.php",
     "keywords": ["Bélgica", "Bruselas"]
