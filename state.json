@@ -1,5 +1,5 @@
 {
- "offset": 852889575,
+ "offset": 852889568,
  "seen": {
   "consulado-inicio": [
    "https://sede.maec.gob.es",
@@ -271,7 +271,9 @@
    "https://www.stib.brussels#e57e6dc487",
    "https://www.stib.brussels#d12858f7f8",
    "https://www.stib.brussels#a851390ae7",
-   "https://www.stib.brussels#097898b1cd"
+   "https://www.stib.brussels#097898b1cd",
+   "https://www.stib.brussels#a88f7ccdb7",
+   "https://www.stib.brussels#a40c46e0d3"
   ]
  },
  "pending": {
@@ -298,6 +300,12 @@
   },
   "5471b07b5a85": {
    "caption": "Manifestación B71 desviado entre ARENBERG y BOZAR dirección DELTA\n\n🇪🇸 Traducción automática. Texto original: Manifestation B71 dévié entre ARENBERG et BOZAR direction DELTA\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "b99f3c612a4e": {
+   "caption": "Manifestación B71 interrumpida entre DE BROUCKERE y TRONE.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B71 interrompu entre DE BROUCKERE et TRONE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "9a3576ea727f": {
+   "caption": "Manifestación: B95 desviado entre TRONE y PETIT SABLON\n\n🇪🇸 Traducción automática. Texto original: Manifestation: B95 dévié entre TRONE et PETIT SABLON\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
