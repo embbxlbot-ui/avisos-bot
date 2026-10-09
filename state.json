@@ -136,7 +136,10 @@
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/02.07.2026.-%20Valoraci%c3%b3n%20provisional%20de%20m%c3%a9ritos%20de%20la%20fase%20de%20concurso,%20entrevista%20y%20total%20proceso%20selectivo.pdf"
   ],
-  "boe-belgica": [],
+  "boe-belgica": [
+   "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21037",
+   "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21052"
+  ],
   "embajada-inicio": [
    "https://sede.maec.gob.es",
    "https://www.exteriores.gob.es/Embajadas/bruselas/es/Embajada/Paginas/Contacto.aspx",
@@ -281,6 +284,12 @@
   },
   "ab90573130d5": {
    "caption": "Viernes 9/10, huelga nacional. Circulan las líneas 1 4 5 7 8 10 12 14 36 46 48 58 59 71 73 82 87 92 95.\n\n🇪🇸 Traducción automática. Texto original: Vendredi 9/10, grève nationale. Les lignes 1 4 5 7 8 10 12 14 36 46 48 58 59 71 73 82 87 92 95 circulent.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "3441279e0f31": {
+   "caption": "Resolución de 30 de septiembre de 2026, de la Secretaría General Técnica, por la que se publica el Convenio entre la Embajada de España en Bélgica e Iberdrola, SA, para la celebración de la Fiesta Nacional de España.\n\nIII. Otras disposiciones - MINISTERIO DE ASUNTOS EXTERIORES, UNIÓN EUROPEA Y COOPERACIÓN - Convenios - Referencia: BOE-A-2026-21037 - KBytes: 220 - Páginas: 5\n\nMás información: https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21037\nFuente: Boletín Oficial del Estado (BOE)\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "cc1e9970ce41": {
+   "caption": "Resolución de 1 de octubre de 2026, de la Secretaría General Técnica, por la que se publica el Convenio entre la Embajada de España en Bélgica y Telefónica, SA, para la celebración de la Fiesta Nacional de España.\n\nIII. Otras disposiciones - MINISTERIO DE ASUNTOS EXTERIORES, UNIÓN EUROPEA Y COOPERACIÓN - Convenios - Referencia: BOE-A-2026-21052 - KBytes: 218 - Páginas: 5\n\nMás información: https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21052\nFuente: Boletín Oficial del Estado (BOE)\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
