@@ -145,7 +145,8 @@
   ],
   "boe-belgica": [
    "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21037",
-   "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21052"
+   "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21052",
+   "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21165"
   ],
   "embajada-inicio": [
    "https://sede.maec.gob.es",
@@ -305,7 +306,9 @@
    "https://www.stib.brussels#8d164ce606",
    "https://www.stib.brussels#b42e598370",
    "https://www.stib.brussels#b66168c145",
-   "https://www.stib.brussels#75eb8e11a6"
+   "https://www.stib.brussels#75eb8e11a6",
+   "https://www.stib.brussels#8c00ab3796",
+   "https://www.stib.brussels#99ac847b26"
   ]
  },
  "pending": {
@@ -404,6 +407,15 @@
   },
   "f9b6edfddd6d": {
    "caption": "Actualizadas las recomendaciones de viaje para Bélgica: Recomendaciones vigentes a 12 de octubre de 2026\n\nMás información: https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx\nFuente: Ministerio de Asuntos Exteriores\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "339826eeb700": {
+   "caption": "12/10, huelga. Tranvías 18, 35, 39, 44 (y T-bus 39- 44) y 93 no circulan.\n\n🇪🇸 Traducción automática. Texto original: 12/10, grève. Trams 18, 35, 39, 44 (et T-bus 39- 44) et 93 ne roulent pas.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "945a8524e6c9": {
+   "caption": "12/10, huelga. T18 35 39 44 (+T-bus 39-44) 93 no explotadas. Otras líneas circulan a frecuencia reducida.\n\n🇪🇸 Traducción automática. Texto original: 12/10, grève. T18 35 39 44 (+T-bus 39-44) 93 non exploitées. Autres lignes roulent à fréquence réduite.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "9da24443b7d0": {
+   "caption": "Acuerdo internacional administrativo entre el Ministerio de Educación, Formación Profesional y Deportes del Reino de España y las Escuelas Europeas para regular la implantación y financiación del catalán como otra lengua nacional (ONL) en el Sistema de Escuelas Europeas, hecho en Bruselas y Madrid el 27 y 31 de agosto de 2026.\n\nI. Disposiciones generales - MINISTERIO DE ASUNTOS EXTERIORES, UNIÓN EUROPEA Y COOPERACIÓN - Acuerdos internacionales administrativos - Referencia: BOE-A-2026-21165 - KBytes: 219 - Páginas: 5\n\nMás información: https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21165\nFuente: Boletín Oficial del Estado (BOE)\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
