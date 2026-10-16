@@ -36,7 +36,8 @@
    "https://www.exteriores.gob.es/es/Paginas/Politica-de-privacidad.aspx",
    "https://www.exteriores.gob.es/es/Paginas/navegacion.aspx",
    "https://www.exteriores.gob.es/es/Paginas/Cookies.aspx",
-   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx"
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx",
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Parte-dispositiva-del-Auto-de-12-de-octubre-de-2026-de-la-Sala-Tercera-del-Tribunal-Supremo.aspx"
   ],
   "consulado-empleo": [
    "https://sede.maec.gob.es",
@@ -540,6 +541,9 @@
   },
   "3c374c7a1759": {
    "caption": "Actualizadas las recomendaciones de viaje para Bélgica: Recomendaciones vigentes a 16 de octubre de 2026\n\nMás información: https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx\nFuente: Ministerio de Asuntos Exteriores\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "3667f28b42d7": {
+   "caption": "Parte dispositiva del Auto de 12 de octubre de 2026 de la Sala Tercera del Tribunal Supremo.\n\nMás información: https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Parte-dispositiva-del-Auto-de-12-de-octubre-de-2026-de-la-Sala-Tercera-del-Tribunal-Supremo.aspx\nFuente: Consulado General de España en Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
