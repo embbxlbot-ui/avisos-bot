@@ -349,7 +349,9 @@
    "https://www.stib.brussels#e00e9027ec",
    "https://www.stib.brussels#f1016b368b",
    "https://www.stib.brussels#b9b6c18a6b",
-   "https://www.stib.brussels#be8f6401dd"
+   "https://www.stib.brussels#be8f6401dd",
+   "https://www.stib.brussels#b8bb60b471",
+   "https://www.stib.brussels#43a0cfa6cd"
   ]
  },
  "pending": {
@@ -577,6 +579,12 @@
   },
   "7d7eeac4dbe2": {
    "caption": "Manifestación B49 interrumpida entre CHARROI y GARE DU MIDI.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B49 interrompu entre CHARROI et GARE DU MIDI.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "29e92086b3e2": {
+   "caption": "Manifestación T4 10 interrumpidos entre THOMAS y GARE DU MIDI.\n\n🇪🇸 Traducción automática. Texto original: Manifestation T4 10 interrompus entre THOMAS et GARE DU MIDI.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "4996340620a3": {
+   "caption": "Manifestación. Autobús 37 desviado entre AVENUE DU ROI y PORTE DE HAL, autobús 48 interrumpido entre ROCHEFORT y ANNEESSENS\n\n🇪🇸 Traducción automática. Texto original: Manifestation. Bus 37 dévié entre AVENUE DU ROI et PORTE DE HAL, bus 48 interrompu entre ROCHEFORT et ANNEESSENS\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
