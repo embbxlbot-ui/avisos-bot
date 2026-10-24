@@ -390,7 +390,11 @@
    "https://www.stib.brussels#312494899d",
    "https://www.stib.brussels#85723ef337",
    "https://www.stib.brussels#77e33e70c1",
-   "https://www.stib.brussels#c60b658daf"
+   "https://www.stib.brussels#c60b658daf",
+   "https://www.stib.brussels#1d2bda2e28",
+   "https://www.stib.brussels#c0e6999870",
+   "https://www.stib.brussels#2ce8ac8496",
+   "https://www.stib.brussels#bb4d6751ed"
   ]
  },
  "pending": {
@@ -741,6 +745,18 @@
   },
   "ac8cce2c69a9": {
    "caption": "Manifestación T10 interrumpida entre GARE DU MIDI y ROGIER.\n\n🇪🇸 Traducción automática. Texto original: Manifestation T10 interrompu entre GARE DU MIDI et ROGIER.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "0cae22f54b9b": {
+   "caption": "Manifestación B50 interrumpida entre BERVOETS y la ESTACIÓN CENTRAL.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B50 interrompu entre BERVOETS et GARE CENTRALE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "0d247a2d8e06": {
+   "caption": "Manifestación B46 interrumpida entre DOVER e YSER.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B46 interrompu entre DOUVRES et YSER.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "19a2b8aff116": {
+   "caption": "Manifestación B73 interrumpida entre HERMES y GARE DU MIDI.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B73 interrompu entre HERMES et GARE DU MIDI.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "f46df99b1bf6": {
+   "caption": "Manifestación B49 interrumpida entre GARE DU MIDI y WIELS.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B49 interrompu entre GARE DU MIDI et WIELS.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
