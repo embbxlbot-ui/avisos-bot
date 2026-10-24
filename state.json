@@ -387,7 +387,9 @@
    "https://www.stib.brussels#dcb94966e4",
    "https://www.stib.brussels#b9d28b64e1",
    "https://www.stib.brussels#4b89203b99",
-   "https://www.stib.brussels#312494899d"
+   "https://www.stib.brussels#312494899d",
+   "https://www.stib.brussels#85723ef337",
+   "https://www.stib.brussels#77e33e70c1"
   ]
  },
  "pending": {
@@ -729,6 +731,12 @@
   },
   "138b271bd01b": {
    "caption": "Manifestación B50 interrumpida entre PORTE DE HAL y GARE CENTRALE.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B50 interrompu entre PORTE DE HAL et GARE CENTRALE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "1130431bd6ab": {
+   "caption": "Manifestación T51 interrumpida entre PORTE DE NINOVE y LEMONNIER, T82 entre PORTE DE NINOVE y WIELS.\n\n🇪🇸 Traducción automática. Texto original: Manifestation T51 interrompu entre PORTE DE NINOVE et LEMONNIER, T82 entre PORTE DE NINOVE et WIELS.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "fb12a1a74fa8": {
+   "caption": "Manifestación T4 interrumpida entre GARE DU NORD y WIELS.\n\n🇪🇸 Traducción automática. Texto original: Manifestation T4 interrompu entre GARE DU NORD et WIELS.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
