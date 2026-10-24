@@ -380,7 +380,9 @@
    "https://www.stib.brussels#583152c1d2",
    "https://www.stib.brussels#294680a0c2",
    "https://www.stib.brussels#d0e2cd8453",
-   "https://www.stib.brussels#7d29a3eb96"
+   "https://www.stib.brussels#7d29a3eb96",
+   "https://www.stib.brussels#9fa885461c",
+   "https://www.stib.brussels#ff5373539b"
   ]
  },
  "pending": {
@@ -701,6 +703,12 @@
   },
   "11a3adbbd546": {
    "caption": "Manifestación B38 interrumpida entre TRONE y la ESTACIÓN CENTRAL.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B38 interrompu entre TRONE et GARE CENTRALE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "1485705c6167": {
+   "caption": "Manifestación B29 interrumpida entre MADOU y DE BROUCKERE, B63 entre MADOU y ESTACIÓN CENTRAL.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B29 interrompu entre MADOU et DE BROUCKERE, B63 entre MADOU et GARE CENTRALE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "ba864546f017": {
+   "caption": "Manifestación B88 interrumpida entre GARE DU NORD y BROUCKERE.\n\n🇪🇸 Traducción automática. Texto original: Manifestation B88 interrompu entre GARE DU NORD et DE BROUCKERE.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
