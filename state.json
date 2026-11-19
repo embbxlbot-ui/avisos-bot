@@ -39,7 +39,8 @@
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Elecciones-a-las-Cortes-Generales-de-29-de-noviembre-de-2026.aspx",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Parte-dispositiva-del-Auto-de-12-de-octubre-de-2026-de-la-Sala-Tercera-del-Tribunal-Supremo.aspx",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/DEMORAS-EN-LA-PRESTACI%c3%93N-DE-SERVICIOS.aspx",
-   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Informaci%c3%b3n-importante-sobre-el-derecho-de-voto-de-los-nacionalizados-por-la-Ley-de-Memoria-Democr%c3%a1tica.aspx"
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Informaci%c3%b3n-importante-sobre-el-derecho-de-voto-de-los-nacionalizados-por-la-Ley-de-Memoria-Democr%c3%a1tica.aspx",
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/EVITE-ACUDIR-AL-CONSULADO-PARA-TR%c3%81MITES-ORDINARIOS-HASTA-EL-30-DE-NOVIEMBRE.aspx"
   ],
   "consulado-empleo": [
    "https://sede.maec.gob.es",
@@ -155,7 +156,8 @@
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20provisional%20%20de%20aspirantes%20con%20resultados%20finales%20AUXILIAR.pdf",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20definitiva%20de%20aspirantes%20con%20resultados%20finales%20SUBALTERNO.pdf",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20definitiva%20de%20aspirantes%20con%20resultados%20finales%20AUXILIAR.pdf",
-   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Informaci%c3%b3n-importante-sobre-el-derecho-de-voto-de-los-nacionalizados-por-la-Ley-de-Memoria-Democr%c3%a1tica.aspx"
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Informaci%c3%b3n-importante-sobre-el-derecho-de-voto-de-los-nacionalizados-por-la-Ley-de-Memoria-Democr%c3%a1tica.aspx",
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/EVITE-ACUDIR-AL-CONSULADO-PARA-TR%c3%81MITES-ORDINARIOS-HASTA-EL-30-DE-NOVIEMBRE.aspx"
   ],
   "boe-belgica": [
    "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21037",
@@ -983,6 +985,9 @@
   },
   "0f0d996225e9": {
    "caption": "23/11, manifestación nacional. Metro, tranvía y autobús muy afectados. Información: stib.brussels y app.\n\n🇪🇸 Traducción automática. Texto original: 23/11, manifestation nationale. Métro, tram et bus fortement perturbés. Info: stib. brussels et app.\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "29d8924ff0d0": {
+   "caption": "​SE RECOMIENDA QUE SE EVITE ACUDIR AL CONSULADO PARA TRÁMITES ORDINARIOS DURANTE EL PERIODO DE DEPÓSITO DE VOTO EN URNA PARA ELECCIONES GENERALES\n\nMás información: https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/EVITE-ACUDIR-AL-CONSULADO-PARA-TR%c3%81MITES-ORDINARIOS-HASTA-EL-30-DE-NOVIEMBRE.aspx\nFuente: Consulado General de España en Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
