@@ -159,7 +159,8 @@
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20definitiva%20de%20aspirantes%20con%20resultados%20finales%20AUXILIAR.pdf",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/Informaci%c3%b3n-importante-sobre-el-derecho-de-voto-de-los-nacionalizados-por-la-Ley-de-Memoria-Democr%c3%a1tica.aspx",
    "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/EVITE-ACUDIR-AL-CONSULADO-PARA-TR%c3%81MITES-ORDINARIOS-HASTA-EL-30-DE-NOVIEMBRE.aspx",
-   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/VOTO-CERA--IMPRESI%c3%93N-DE-LAS-PAPELETAS-ELECTORALES.aspx"
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Comunicacion/Noticias/Paginas/Articulos/VOTO-CERA--IMPRESI%c3%93N-DE-LAS-PAPELETAS-ELECTORALES.aspx",
+   "https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20provisional%20%20de%20aspirantes%20con%20resultados%20finales%20OFICIAL.pdf"
   ],
   "boe-belgica": [
    "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-21037",
@@ -259,7 +260,8 @@
    "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#c15e1e64",
    "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#d8ec8750",
    "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#020083c0",
-   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#19a5381a"
+   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#19a5381a",
+   "https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx#44485d5d"
   ],
   "consejeria-educacion": [
    "https://www.educacionfpydeportes.gob.es/belgica/oficinasycentros.html",
@@ -465,7 +467,8 @@
    "https://www.stib.brussels#63ff97785c",
    "https://www.stib.brussels#a3210281c8",
    "https://www.stib.brussels#dccad0875c",
-   "https://www.stib.brussels#2de7d558ea"
+   "https://www.stib.brussels#2de7d558ea",
+   "https://www.stib.brussels#c6450dd70b"
   ]
  },
  "pending": {
@@ -1029,6 +1032,15 @@
   },
   "1ce837ae5ac4": {
    "caption": "23/11, manifestación nacional. Líneas en servicio: 1 4 5 7 8 10 14 29 36 54 56 58 59 71 73 82 87 92 95\n\n🇪🇸 Traducción automática. Texto original: 23/11, manifestation nationale. Lignes exploitées: 1 4 5 7 8 10 14 29 36 54 56 58 59 71 73 82 87 92 95\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "a55fb845bb44": {
+   "caption": "Relación provisional de aspirantes con resultados finales OFICIAL.pdf\n\nMás información: https://www.exteriores.gob.es/Consulados/bruselas/es/Consulado/Documents/Relaci%c3%b3n%20provisional%20%20de%20aspirantes%20con%20resultados%20finales%20OFICIAL.pdf\nFuente: Consulado General de España en Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "93e394762111": {
+   "caption": "Actualizadas las recomendaciones de viaje para Bélgica: Recomendaciones vigentes a 24 de noviembre de 2026\n\nMás información: https://www.exteriores.gob.es/Embajadas/Bruselas/es/ViajarA/Paginas/Recomendaciones-de-viaje.aspx\nFuente: Ministerio de Asuntos Exteriores\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
+  },
+  "3d9c3ad2fab5": {
+   "caption": "23/11, manifestación nacional. Líneas en servicio: 1 4 5 7 8 10 14 29 34 36 46 54 56 58 59 71 73 82 87 92 95\n\n🇪🇸 Traducción automática. Texto original: 23/11, manifestation nationale. Lignes exploitées: 1 4 5 7 8 10 14 29 34 36 46 54 56 58 59 71 73 82 87 92 95\n\nMás información: https://www.stib.brussels\nFuente: STIB · Transporte de Bruselas\n\nℹ️ Cuenta no oficial. Contenido compartido de fuentes oficiales; no nos responsabilizamos de cambios o información desactualizada. Confirma siempre en los canales oficiales."
   }
  }
 }
